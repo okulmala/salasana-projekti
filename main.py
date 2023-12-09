@@ -25,19 +25,39 @@ def caesar_decrypt(text, shift):
 
 # Password strength checker function (optional)
 def is_strong_password(password):
-    # ...
+    """
+    Check if a password is strong.
+
+    A strong password should:
+    - Be at least 14 characters long
+    - Contain both uppercase and lowercase letters
+    - Contain at least one digit
+    - Contain at least one special character
+    
+    """
+    if len(password) < 14:
+        return False
+
+    if not any(char.isupper() for char in password):
+        return False
+
+    if not any(char.islower() for char in password):
+        return False
+
+    if not any(char.isdigit() for char in password):
+        return False
+
+    special_characters = "!@#$%^&*()-=_+[]{}|;:'\",.<>/?"
+    if not any(char in special_characters for char in password):
+        return False
+
+    return True
 
 # Password generator function (optional)
 def generate_password(length):
-     """
-    Generate a random strong password of the specified length.
-
-    Args:
-        length (int): The desired length of the password.
-
-    Returns:
-        str: A random strong password.
-    """
+#Generate random strong password of the specified length.
+    characters = string.ascii_letters + string.digits + "!@#$%^&*()-=_+[]{}|;:'\",.<>/?"
+    return ''.join(random.choice(characters) for _ in range(length))
 
 # Initialize empty lists to store encrypted passwords, websites, and usernames
 encrypted_passwords = []
@@ -46,15 +66,40 @@ usernames = []
 
 # Function to add a new password 
 def add_password():
-    """
-    Add a new password to the password manager.
+    website = input("Enter the website: ")
+    username = input("Enter the username: ")
+    #Ask the user if they want to enter the password manually or use a generated one
+    password_option = input("Do you want to enter a password manually or generate a random one? (manual/generate): ")
 
-    This function should prompt the user for the website, username,  and password and store them to lits with same index. Optionally, it should check password strengh with the function is_strong_password. It may also include an option for the user to
-    generate a random strong password by calling the generate_password function.
+ # Check if the user chose to enter the password manually
+if password_option.lower() == 'manual':
+    # Ask the user to enter the password
+    password = input("Enter the password: ")
+# Check if the user chose to generate a random password
+elif password_option.lower() == 'generate':
+    # Ask the user to enter the desired length for the generated password
+    password_length = int(input("Enter the length of the password to generate: "))
+    # Generate a random password of the specified length
+    password = generate_password(password_length)
+# If the user's choice is neither 'manual' nor 'generate', inform them about the invalid option
+else:
+    print("Invalid option. Please try again.")
+    return
 
-    Returns:
-        None
-    """
+# Check if the entered password is not strong and ask the user to consider using a stronger one
+    if not is_strong_password(password):
+        print("Password is not strong. Consider using a stronger password.")
+        return
+
+    # Encrypt the password before storing
+    encrypted_password = caesar_encrypt(password, shift=3)
+
+    # Add the entered data to respective lists
+    websites.append(website)
+    usernames.append(username)
+    encrypted_passwords.append(encrypted_password)
+
+    print("Password added successfully.")
 
 # Function to retrieve a password 
 def get_password():
