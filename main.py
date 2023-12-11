@@ -104,7 +104,7 @@ else:
 # Function to retrieve a password 
 def get_password():
     
-     website_to_find = input("Enter the website for which you want to retrieve the password: ")
+    website_to_find = input("Enter the website for which you want to retrieve the password: ")
 
     # Check if the website is in the list
     if website_to_find in websites:
