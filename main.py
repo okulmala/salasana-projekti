@@ -103,15 +103,28 @@ else:
 
 # Function to retrieve a password 
 def get_password():
-    """
-    Retrieve a password for a given website.
+    
+    website_to_find = input("Enter the website for which you want to retrieve the password: ")
 
-    This function should prompt the user for the website name and
-    then display the username and decrypted password for that website.
+    # Check if the website is in the list
+    if website_to_find in websites:
+        # Find the index of the website in the list
+        index = websites.index(website_to_find)
 
-    Returns:
-        None
-    """
+        # Retrieve the corresponding username and encrypted password
+        username = usernames[index]
+        encrypted_password = encrypted_passwords[index]
+
+        # Decrypt the password
+        decrypted_password = caesar_decrypt(encrypted_password, shift=3)
+
+        # Display the information
+        print(f"Website: {website_to_find}")
+        print(f"Username: {username}")
+        print(f"Password: {decrypted_password}")
+    else:
+        print(f"Password for {website_to_find} not found.")
+
 
 # Function to save passwords to a JSON file 
 def save_passwords():
