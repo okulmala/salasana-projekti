@@ -72,19 +72,19 @@ def add_password():
     password_option = input("Do you want to enter a password manually or generate a random one? (manual/generate): ")
 
  # Check if the user chose to enter the password manually
-if password_option.lower() == 'manual':
-    # Ask the user to enter the password
-    password = input("Enter the password: ")
-# Check if the user chose to generate a random password
-elif password_option.lower() == 'generate':
-    # Ask the user to enter the desired length for the generated password
-    password_length = int(input("Enter the length of the password to generate: "))
-    # Generate a random password of the specified length
-    password = generate_password(password_length)
-# If the user's choice is neither 'manual' nor 'generate', inform them about the invalid option
-else:
-    print("Invalid option. Please try again.")
-    return
+    if password_option.lower() == 'manual':
+        # Ask the user to enter the password
+        password = input("Enter the password: ")
+    # Check if the user chose to generate a random password
+    elif password_option.lower() == 'generate':
+        # Ask the user to enter the desired length for the generated password
+        password_length = int(input("Enter the length of the password to generate: "))
+        # Generate a random password of the specified length
+        password = generate_password(password_length)
+    # If the user's choice is neither 'manual' nor 'generate', inform them about the invalid option
+    else:
+        print("Invalid option. Please try again.")
+        return
 
 # Check if the entered password is not strong and ask the user to consider using a stronger one
     if not is_strong_password(password):
@@ -138,9 +138,9 @@ def save_passwords():
         None
     """
 
-    Returns:
-        None
-    """
+    # Returns:
+    #     None
+
 
 # Function to load passwords from a JSON file 
 def load_passwords():
@@ -152,6 +152,8 @@ def load_passwords():
 
     Returns:
         None
+    """
+
 
   # Main method
 def main():
