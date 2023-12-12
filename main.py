@@ -151,21 +151,18 @@ def save_passwords():
     #     None
 
 
-# Function to load passwords from a JSON file 
 def load_passwords(file_path="vault.txt"):
      try:
         with open(file_path, 'r') as file:
             data = json.load(file)
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
     for datum in data:
         websites.append(datum['website'])
         usernames.append(datum['username'])
         encrypted_passwords.append(datum['password_hash'])
     except json.JSONDecodeError:
         print(f"Error decoding JSON in file: {file_path}")
-
-    Returns:
-        None
-    """
 
 
   # Main method
