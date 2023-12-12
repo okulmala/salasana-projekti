@@ -152,12 +152,16 @@ def save_passwords():
 
 
 # Function to load passwords from a JSON file 
-def load_passwords():
-     """
-    Load passwords from a file into the password vault.
-
-    This function should load passwords, websites, and usernames from a text
-    file named "vault.txt" (or a more generic name) and populate the respective lists.
+def load_passwords(file_path="vault.json"):
+     try:
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+            return data
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+        return None
+    except json.JSONDecodeError:
+        print(f"Error decoding JSON in file: {file_path}")
 
     Returns:
         None
