@@ -139,11 +139,14 @@ def save_passwords():
         usernames.append(datum["username"])
         encrypted_passwords.append(datum["password_hash"])
     
-    updated_data =[]
-    for i in range (len(usernames)):
-            updated_data.append({"website":websites[i], "username": usernames[i], "password_hash": encrypted_passwords[i]})
+
+    no_duplicates_data = []
+    for i in range(len(usernames)):
+        datum = {"website":websites[i], "username": usernames[i], "password_hash": encrypted_passwords[i]}
+        if datum not in no_duplicates_data:
+            no_duplicates_data.append(datum)
     
-    updated_data_json = json.dumps(updated_data)
+    updated_data_json = json.dumps(no_duplicates_data)
 
     with open("vault.txt", "w") as vault_file:
         vault_file.write(updated_data_json)   
