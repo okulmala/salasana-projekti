@@ -130,12 +130,23 @@ def get_password():
 def save_passwords():
     website_data = []
     for i in range (len(usernames)):
-            website_data.append({"website":websites[0], "username": usernames[0], "password_hash": encrypted_passwords[0]})
+            website_data.append({"website":websites[i], "username": usernames[i], "password_hash": encrypted_passwords[i]})
 
-    website_data_json = json.dumps(website_data)
+    # website_data_json = json.dumps(website_data)
+    load_passwords()
+    for datum in website_data:
+        websites.append(datum["website"])
+        usernames.append(datum["username"])
+        encrypted_passwords.append(datum["password_hash"])
+    
+    updated_data =[]
+    for i in range (len(usernames)):
+            updated_data.append({"website":websites[i], "username": usernames[i], "password_hash": encrypted_passwords[i]})
+    
+    updated_data_json = json.dumps(updated_data)
 
-    with open("vault.txt", "a") as vault_file:
-        vault_file.write(website_data_json)   
+    with open("vault.txt", "w") as vault_file:
+        vault_file.write(updated_data_json)   
 
 """
     Save the password vault to a file.
