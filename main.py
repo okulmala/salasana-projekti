@@ -56,8 +56,22 @@ def is_strong_password(password):
 # Password generator function (optional)
 def generate_password(length):
 #Generate random strong password of the specified length.
-    characters = string.ascii_letters + string.digits + "!@#$%^&*()-=_+[]{}|;:'\",.<>/?"
-    return ''.join(random.choice(characters) for _ in range(length))
+    # ensure (well, almost) password is considered strong if generating a password at least 14 characters long
+    if(length >= 14):
+        try:
+            i = 0
+            while (i<100):
+                characters = string.ascii_letters + string.digits + "!@#$%^&*()-=_+[]{}|;:'\",.<>/?"
+                generated_password = ''.join(random.choice(characters) for _ in range(length))
+                if(is_strong_password(generated_password)): return generated_password
+                i += 1
+            raise ValueError('Failed to generate strong password')
+        except ValueError: print("Failed to generate strong password") 
+        return generated_password
+    else:
+        characters = string.ascii_letters + string.digits + "!@#$%^&*()-=_+[]{}|;:'\",.<>/?"
+        generated_password = ''.join(random.choice(characters) for _ in range(length))
+        return generated_password
 
 # Initialize empty lists to store encrypted passwords, websites, and usernames
 encrypted_passwords = []
@@ -89,7 +103,6 @@ def add_password():
 # Check if the entered password is not strong and ask the user to consider using a stronger one
     if not is_strong_password(password):
         print("Password is not strong. Consider using a stronger password.")
-        return
 
     # Encrypt the password before storing
     encrypted_password = caesar_encrypt(password, shift=3)
