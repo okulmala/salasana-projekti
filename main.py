@@ -143,7 +143,7 @@ def get_password():
 def save_passwords():
     website_data = []
     for i in range (len(usernames)):
-            website_data.append({"website":websites[0], "username": usernames[0], "password_hash": encrypted_passwords[0]})
+            website_data.append({"website":websites[i], "username": usernames[i], "password_hash": encrypted_passwords[i]})
 
     website_data_json = json.dumps(website_data)
 
