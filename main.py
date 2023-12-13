@@ -128,9 +128,9 @@ def get_password():
 
 # Function to save passwords to a JSON file 
 def save_passwords():
-    website_data = []
-    for i in range (len(usernames)):
-            website_data.append({"website":websites[i], "username": usernames[i], "password_hash": encrypted_passwords[i]})
+    # website_data = []
+    # for i in range (len(usernames)):
+    #         website_data.append({"website":websites[i], "username": usernames[i], "password_hash": encrypted_passwords[i]})
 
     # website_data_json = json.dumps(website_data)
     load_passwords()
