@@ -103,7 +103,6 @@ def add_password():
 # Check if the entered password is not strong and ask the user to consider using a stronger one
     if not is_strong_password(password):
         print("Password is not strong. Consider using a stronger password.")
-        return
 
     # Encrypt the password before storing
     encrypted_password = caesar_encrypt(password, shift=3)
